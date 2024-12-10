@@ -940,7 +940,15 @@ function TranslateXmlTags(sXml, sFromLanguage) {
             {
                 'ru': 'ВалютаВзаиморасчетов',
                 'en': 'CurrencyOfTheSettlements'
-            }
+            },
+            {
+                'ru': 'Справочник.ПрисоединенныеФайлы',
+                'en': 'Directory.AttachedFiles'
+            },
+            {
+                'ru': 'Значение',
+                'en': 'Value'
+            },
         ]
         for (oDict in aDict) {
             sFromTagName = oDict.GetProperty(sFromLanguage)
