@@ -195,7 +195,7 @@ function HandlePayslips(teBody)
 								/* Удаляем файл с сервера и зачищаем поле со ссылками*/
 								DeleteFile(UrlToOptFilePath( docFile.TopElem.file_url ));
 								docFile.TopElem.file_url = "";
-								docFile.TopElem.links.DeleteChildren();
+								docFile.TopElem.links.DeleteChildren("This.object_id != 0");
 								docFile.Save();
 							}
 						} else {
@@ -211,10 +211,9 @@ function HandlePayslips(teBody)
 						docResource = tools.open_doc(iDocID);
 						if (docResource != undefined) {
 							/* Вставляем файл */
-							ObtainDirectory("x-local://wt_data/attachments/");
-							PutFileData(UrlToFilePath('x-local://wt_data/attachments/' + oFile.KeyProperties.Owner + oFile.Extension), Base64Decode(oFile.FileStorage));
-							docResource.TopElem.file_name = oFile.KeyProperties.Owner + oFile.Extension;
-							docResource.TopElem.file_url = 'x-local://wt_data/attachments/' + oFile.KeyProperties.Owner + oFile.Extension;
+							sTempUrl = ObtainTempFile(oFile.Extension);
+							PutFileData(UrlToFilePath(sTempUrl), Base64Decode(oFile.FileStorage));
+							docResource.TopElem.put_data(sTempUrl);
 							newLink = docResource.TopElem.links.AddChild();
 							newLink.object_id = OptInt(iPaySlipID, 0);
 							newLink.object_catalog = "object_data";
