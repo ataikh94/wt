@@ -379,14 +379,14 @@ function HandlePackage(sXml) {
     sLib = "libAflIntegration"
     sFunction = "HandlePackage"
     try {
-        AlertLog(1)
+        //AlertLog(1)
 
         oResTransslate = TranslateXmlTags(sXml)
         if (oResTransslate.error == 0) {
-            AlertLog(2)
+            //AlertLog(2)
             //TODO добавить функцию для определения типа переданной формы
             oPacketType = GetPackageType(oResTransslate.result)
-            AlertLog(oResTransslate.result)
+            //AlertLog(oResTransslate.result)
             docPacketContent = undefined
             try {
                 //docPacketContent = OpenDocFromStr(oResTransslate.result, "form='x-local://wtv/custom_libs/"+oPacketType.name+".xmd'")
@@ -396,22 +396,22 @@ function HandlePackage(sXml) {
                 oRes = PushError('Возникла ошибка при обработке Xml пакета: ' + e + '. \n ' + oResTransslate.result, oRes, sFunction, sLib)
             }
             if (docPacketContent != undefined) {
-                AlertLog(2)
+                //AlertLog(2)
                 if(oPacketType!=undefined)
                 {
-                    AlertLog(3)
+                    //AlertLog(3)
                     tePacketContent = docPacketContent.TopElem
                     switch (oPacketType.name) {
                         case 'collaborator':
-                            AlertLog(4)
+                            //AlertLog(4)
                             oRes = tools.call_code_library_method(oPacketType.library, oPacketType.library_function, [tePacketContent])
                             break;
                         case 'exchange_message':
-                            AlertLog(4)
+                            //AlertLog(4)
                             oRes = tools.call_code_library_method(oPacketType.library, oPacketType.library_function, [tePacketContent])
                             break;
                         default:
-                            AlertLog(5)
+                            //AlertLog(5)
                             oRes = PushError('Был передан пакет с содержимым тип которого не обрабатывается.', oRes, sFunction, sLib)
                             break;
                     }
